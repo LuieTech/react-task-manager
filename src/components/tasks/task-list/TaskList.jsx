@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import tasksData from '../../../data/tasks.json';
 import TaskItem from '../task-item/TaskItem';
+import TaskFinder from '../task-finder/TaskFinder';
+import { faker } from '@faker-js/faker';
 
 function TaskList() {
   const [tasks, setTasks] = useState(tasksData);
@@ -19,16 +21,57 @@ function TaskList() {
     setTasks(completedTasks);
   }
 
+  const handleSearchTask = (title) => {
+    if (!title) {
+      setTasks(tasksData);
+    } else {
+      setTasks(tasks.filter(task => task.title.toLocaleLowerCase().includes(title.toLocaleLowerCase())));
+    }
+  }
+
+  const handleCreateRandomTask = () => {
+    setTasks([
+      ...tasks,
+      { title: faker.lorem.sentence(5), completed: false }
+    ])
+  }
+
+  const handleSortTasks = (orientation) => {
+    switch (orientation) {
+      case 'asc':
+        setTasks([...tasks].sort((t1, t2) => t1.title.localeCompare(t2.title)));
+        break;
+      case 'desc':
+        setTasks([...tasks].sort((t1, t2) => t2.title.localeCompare(t1.title)));
+        break;
+      default:
+    }
+  }
+
   return (
-    <ul className='list-group'>
-      {tasks.map(task => (
-        <TaskItem key={task.title} 
-          task={task} 
-          onDeleteTask={handleDeleteTask} 
-          onCompleteTask={handleCompleteTask} />
-      ))}
-    </ul>
+    <div className='d-flex flex-column gap-2'>
+      <div className='d-flex gap-2'>
+        <TaskFinder onSearch={handleSearchTask} onSort={handleSortTasks}  />
+        <button className='btn btn-primary' onClick={handleCreateRandomTask}><i className='fa fa-plus'></i></button>
+      </div>
+      <ul className='list-group'>
+        {tasks.map(task => (
+          <TaskItem key={task.title} 
+            task={task} 
+            {...task}
+            onDeleteTask={handleDeleteTask} 
+            onCompleteTask={handleCompleteTask} />
+        ))}
+      </ul>
+    </div>
   )
 }
 
 export default TaskList;
+
+
+
+const numbers = [1, 2, 3, 4, 5, 6];
+const numbers2 = [1, 2, 3, 4, 5, 6, 8];
+
+// ...numbers => 1,2,4,5,6,6

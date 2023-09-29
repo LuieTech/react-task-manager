@@ -1,3 +1,4 @@
+import TaskFinder from "./components/tasks/task-finder/TaskFinder";
 import TaskList from "./components/tasks/task-list/TaskList"
 
 function App() {
