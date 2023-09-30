@@ -3,6 +3,7 @@ import tasksData from '../../../data/tasks.json';
 import TaskItem from '../task-item/TaskItem';
 import TaskFinder from '../task-finder/TaskFinder';
 import { faker } from '@faker-js/faker';
+import TaskForm from '../task-form/TaskForm';
 
 function TaskList() {
   const [tasks, setTasks] = useState(tasksData);
@@ -48,6 +49,13 @@ function TaskList() {
     }
   }
 
+  const handleCreateTask = (task) => {
+    setTasks([
+      ...tasks,
+      task
+    ])
+  }
+
   return (
     <div className='d-flex flex-column gap-2'>
       <div className='d-flex gap-2'>
@@ -63,15 +71,9 @@ function TaskList() {
             onCompleteTask={handleCompleteTask} />
         ))}
       </ul>
+      <TaskForm onCreate={handleCreateTask} />
     </div>
   )
 }
 
 export default TaskList;
-
-
-
-const numbers = [1, 2, 3, 4, 5, 6];
-const numbers2 = [1, 2, 3, 4, 5, 6, 8];
-
-// ...numbers => 1,2,4,5,6,6
