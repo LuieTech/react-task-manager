@@ -6,12 +6,20 @@ const taskGroupSchema = new Schema(
     name: {
       type: String,
       trim: true,
-      require: 'Group name is required',
+      required: 'Group name is required',
       minLength: [3, 'Group name needs at least 3 chars']
     }
   },
   {
-    timestamps: true
+    timestamps: true,
+    toJSON: {
+      transform: function (doc, ret) {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
+        return ret;
+      }
+    }
   }
 )
 
