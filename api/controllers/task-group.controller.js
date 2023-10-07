@@ -33,6 +33,7 @@ module.exports.delete = (req, res, next) => {
 
 module.exports.detail = (req, res, next) => {
   TaskGroup.findById(req.params.id)
+    .populate('tasks')
     .then((group) => {
       if (!group) {
         next(createError(404, 'TaskGroup not found'));
