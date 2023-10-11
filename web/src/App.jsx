@@ -1,15 +1,14 @@
-import GroupList from "./components/groups/group-list/GroupList";
-import TaskFinder from "./components/tasks/task-finder/TaskFinder";
-import TaskList from "./components/tasks/task-list/TaskList"
+import { Navigate, Route, Routes } from "react-router-dom";
+import TaskList from "./pages/tasks/list";
 
 function App() {
-
   return (
     <div className="container py-5">
-      <GroupList />
-      <TaskList />
+      <Routes>
+        <Route path="/tasks" element={<TaskList />} />
+      </Routes>
     </div>
-  )
+  );
 }
 
 export default App;
