@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function TaskList() {
   const [data, setData] = useState([]);
@@ -18,7 +19,9 @@ function TaskList() {
       <section className="row">
         {data.map((task) => (
           <div className="col-3 p-5" key={task.id}>
-            <h3>{task.title}</h3>
+            <h3>
+              <Link to={`/tasks/${task.id}`}>{task.title}</Link>
+            </h3>
             <p>{task.group.name}</p>
           </div>
         ))}
