@@ -12,15 +12,18 @@ function TaskList() {
   }, []);
 
   return (
-    <div>
+    <section>
       <h1>Task list</h1>
-
-      <ul>
+      <input type="text" />
+      <section className="row">
         {data.map((task) => (
-          <li key={task.id}>{task.title}</li>
+          <div className="col-3 p-5" key={task.id}>
+            <h3>{task.title}</h3>
+            <p>{task.group.name}</p>
+          </div>
         ))}
-      </ul>
-    </div>
+      </section>
+    </section>
   );
 }
 
