@@ -4,6 +4,7 @@ const Task = require("../models/task.model");
 
 module.exports.list = (req, res, next) => {
   // TODO: filters
+
   Task.find()
     .populate("group")
     .then((tasks) => {

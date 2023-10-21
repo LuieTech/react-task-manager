@@ -1,16 +1,24 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { getTasks } from "../../services/groups-service";
 
 function TaskList() {
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:3000/v1/tasks")
-      .then((res) => res.json())
+    getTasks()
       .then((data) => {
         setData(data);
+      })
+      .catch((err) => {
+        if (err.response.status === 401) {
+          navigate("/login");
+        }
       });
   }, []);
+
+  if (!data) return <div>Loading...</div>;
 
   return (
     <section>

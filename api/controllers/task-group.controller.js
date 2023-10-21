@@ -2,10 +2,11 @@ const createError = require("http-errors");
 const TaskGroup = require("../models/task-group.model");
 
 module.exports.list = (req, res, next) => {
+  const criteria = {};
   const { name } = req.query;
-  const criterial = {};
+
   if (name) {
-    criterial.name = name;
+    criteria.name = name;
   }
 
   TaskGroup.find(criterial)
