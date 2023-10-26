@@ -10,9 +10,15 @@ export function AuthProvider({ children }) {
     setUser(user);
   }
 
+  function onLogout() {
+    localStorage.removeItem("user");
+    setUser(null);
+  }
+
   const value = {
     user,
     onLogin,
+    onLogout,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

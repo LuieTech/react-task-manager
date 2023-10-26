@@ -3,6 +3,8 @@ import TaskList from "./pages/tasks/list";
 import TaskDetail from "./pages/tasks/detail";
 import NavBar from "./components/navbar";
 import LoginPage from "./pages/login/login";
+import { Authenticated, Unauthenticated } from "./components/authenticated";
+import SignupPage from "./pages/signup/signup";
 
 function App() {
   return (
@@ -11,9 +13,38 @@ function App() {
 
       <div className="container py-5">
         <Routes>
-          <Route path="/tasks" element={<TaskList />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/tasks/:id" element={<TaskDetail />} />
+          <Route
+            path="/tasks"
+            element={
+              <Authenticated>
+                <TaskList />
+              </Authenticated>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <Unauthenticated>
+                <LoginPage />
+              </Unauthenticated>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <Unauthenticated>
+                <SignupPage />
+              </Unauthenticated>
+            }
+          />
+          <Route
+            path="/tasks/:id"
+            element={
+              <Authenticated>
+                <TaskDetail />
+              </Authenticated>
+            }
+          />
 
           <Route path="*" element={<Navigate to="/tasks" />} />
         </Routes>

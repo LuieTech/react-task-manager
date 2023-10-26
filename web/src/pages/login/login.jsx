@@ -1,21 +1,17 @@
 import { useForm } from "react-hook-form";
-import { login } from "../../services/groups-service";
+import { login } from "../../services/api-service";
 import { useAuthContext } from "../../contexts/auth-context";
-import { Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function LoginPage() {
   const { register, handleSubmit } = useForm();
 
-  const { onLogin, user } = useAuthContext();
+  const { onLogin } = useAuthContext();
 
   function handleLogin(data) {
     login(data).then((response) => {
       onLogin(response);
     });
-  }
-
-  if (user) {
-    return <Navigate to="/" />;
   }
 
   return (
@@ -51,6 +47,10 @@ function LoginPage() {
         <button type="submit" className="btn btn-primary">
           Login
         </button>
+
+        <Link className="btn btn-link" to="/signup">
+          Sign up
+        </Link>
       </form>
     </div>
   );

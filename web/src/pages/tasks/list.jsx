@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { getTasks } from "../../services/groups-service";
+import { getTasks } from "../../services/api-service";
 import { useAuthContext } from "../../contexts/auth-context";
 
 function TaskList() {
   const [data, setData] = useState([]);
-  const { onLogin, user } = useAuthContext();
+  const { onLogin } = useAuthContext();
 
   useEffect(() => {
     getTasks()
@@ -18,10 +18,6 @@ function TaskList() {
         }
       });
   }, []);
-
-  if (!user) {
-    return <Navigate to="/login" />;
-  }
 
   if (!data) return <div>Loading...</div>;
 

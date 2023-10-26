@@ -4,6 +4,8 @@ module.exports.create = (req, res, next) => {
   User.create({
     email: req.body.email,
     password: req.body.password,
+    name: req.body.name,
+    avatar: req.file?.path,
   })
     .then((user) => {
       res.status(201).json(user);
@@ -28,4 +30,9 @@ module.exports.login = (req, res, next) => {
       }
     })
     .catch(next);
+};
+
+module.exports.logout = (req, res, next) => {
+  req.session.destroy();
+  res.status(204).send();
 };

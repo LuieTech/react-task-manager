@@ -4,6 +4,7 @@ const groups = require("../controllers/task-group.controller");
 const tasks = require("../controllers/tasks.controller");
 const users = require("../controllers/users.controller");
 const auth = require("../middlewares/auth.middleware");
+const upload = require("../config/multer.config");
 
 router.get("/task-groups", groups.list);
 router.post("/task-groups", groups.create);
@@ -17,7 +18,8 @@ router.post("/tasks", tasks.create);
 router.patch("/tasks", tasks.update);
 router.delete("/tasks/:id", tasks.delete);
 
-router.post("/users", users.create);
+router.post("/users", upload.single("avatar"), users.create);
 router.post("/login", users.login);
+router.post("/logout", users.logout);
 
 module.exports = router;
