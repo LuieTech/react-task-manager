@@ -1,17 +1,19 @@
 import { useForm } from "react-hook-form";
 import { login } from "../../services/api-service";
 import { useAuthContext } from "../../contexts/auth-context";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const { register, handleSubmit } = useForm();
-
+  const navigate = useNavigate()
   const { onLogin } = useAuthContext();
 
   function handleLogin(data) {
     login(data).then((response) => {
       onLogin(response);
-    });
+      navigate("/tasks")
+    })
+    
   }
 
   return (

@@ -2,7 +2,7 @@ import axios from "axios";
 
 const service = axios.create({
   withCredentials: true,
-  baseURL: import.meta.env.REACT_APP_BASE_API_URL || "http://localhost:3000/v1",
+  baseURL: import.meta.env.REACT_APP_BASE_API_URL || "http://localhost:3001/v1",
 });
 
 export function login(data) {
@@ -28,5 +28,14 @@ export function createUser(body) {
     formData.append("avatar", body.avatar[0]);
   }
 
-  return service.post("/users", formData);
+  return service.post("/users", body);
+
+  /*
+    return service.post("/users, formData, {
+      headers: {
+        content-type: 'multipart/form-data'
+      }
+    }); 
+  */
+  
 }

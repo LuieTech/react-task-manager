@@ -10,6 +10,8 @@ function TaskList() {
   useEffect(() => {
     getTasks()
       .then((data) => {
+        console.log("THIS IS GETTASKS: ", data);
+        
         setData(data);
       })
       .catch((err) => {
@@ -26,12 +28,12 @@ function TaskList() {
       <h1>Task list</h1>
       <input type="text" />
       <section className="row">
-        {data.map((task) => (
+        {data?.map((task) => (
           <div className="col-3 p-5" key={task.id}>
             <h3>
               <Link to={`/tasks/${task.id}`}>{task.title}</Link>
             </h3>
-            <p>{task.group.name}</p>
+            <p>{task?.group.name}</p>
           </div>
         ))}
       </section>

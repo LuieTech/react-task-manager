@@ -1,6 +1,7 @@
 const User = require("../models/user.model");
 
 module.exports.create = (req, res, next) => {
+
   User.create({
     email: req.body.email,
     password: req.body.password,
@@ -21,6 +22,7 @@ module.exports.login = (req, res, next) => {
           if (match) {
             req.session.userId = user.id;
             res.json(user);
+            console.log(user)
           } else {
             res.status(401).json({ error: "unauthorized" });
           }
