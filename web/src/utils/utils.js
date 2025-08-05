@@ -1,6 +1,5 @@
 
 
-
 export function prettyCost(cent){
 
   if(!cent || typeof cent !== 'number'){

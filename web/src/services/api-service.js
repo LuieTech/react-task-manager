@@ -6,11 +6,13 @@ const service = axios.create({
 });
 
 export function login(data) {
-  return service.post("/login", data).then((response) => response.data);
+  return service.post("/login", data)
+    //.then((response) => response.data);
 }
 
 export function getTasks() {
-  return service.get("/tasks").then((response) => response.data);
+  return service.get("/tasks")
+    .then((response) => response.data);
 }
 
 export function logoutApi() {
